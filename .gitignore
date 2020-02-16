@@ -1,0 +1,14 @@
+.idea
+
+logs/*
+
+node_modules
+
+
+.DS_Store
+
+env/production.env
+
+dist
+
+*.yaml
