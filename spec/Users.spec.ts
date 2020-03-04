@@ -5,7 +5,7 @@ import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { Response, SuperTest, Test } from 'supertest';
 import { IUser, User } from '@entities';
 import { UserDao } from '@daos';
-import { pErr, paramMissingError } from '@shared';
+import { pErr, paramMissingError } from 'util';
 
 describe('Users Routes', () => {
 

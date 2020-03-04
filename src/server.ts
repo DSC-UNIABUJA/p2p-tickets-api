@@ -1,7 +1,7 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import mongoose from 'mongoose';
-import {logger} from '@shared';
+import {logger} from 'util';
 import BaseRouter from './routes';
 
 // Init express

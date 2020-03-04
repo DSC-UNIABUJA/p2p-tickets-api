@@ -6,11 +6,10 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "module": "commonjs",
-    "outDir": "dist",
     "removeComments": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es6",
+    "target": "es2019",
     "moduleResolution": "node",
     "paths": {
       "@daos": [
