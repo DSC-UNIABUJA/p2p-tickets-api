@@ -14,11 +14,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     ref: 'Role',
   },
-  eventToken: String,
-  eventId: {
-    type: String,
-    ref: 'Event',
-  },
 });
 
 const User = mongoose.model('User', userSchema);

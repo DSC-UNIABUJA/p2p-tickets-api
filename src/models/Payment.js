@@ -15,14 +15,9 @@ const paymentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  user: {
+  ticket: {
     type: String,
-    ref: 'User',
-    required: true,
-  },
-  event: {
-    type: String,
-    ref: 'Event',
+    ref: 'Ticket',
     required: true,
   },
 });

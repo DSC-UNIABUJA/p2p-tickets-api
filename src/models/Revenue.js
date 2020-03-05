@@ -21,6 +21,7 @@ const revenueSchema = new mongoose.Schema({
   },
   payment: {
     type: String,
+    ref: 'Payment',
     required: true,
   },
 });
