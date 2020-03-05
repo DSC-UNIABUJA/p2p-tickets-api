@@ -1,6 +1,6 @@
 'use strict';
 
-require('./LoadEnv');
+require('./loadenv');
 
 const server = require('./server');
 const logger = require('./util/logger');
