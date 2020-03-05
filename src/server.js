@@ -13,7 +13,6 @@ const app = express();
       useNewUrlParser: true,
       useUnifiedTopology: true,
       autoIndex: false,
-      timestamps: true,
     };
     await mongoose.connect(process.env.DB_URL, options);
   } catch (error) {

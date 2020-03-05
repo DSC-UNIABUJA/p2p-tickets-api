@@ -1,21 +1,26 @@
 const mongoose = require('mongoose');
 
-const ticketSchema = new mongoose.Schema({
-  _id: String,
-  id: {
-    type: String,
-    required: true,
-    unique: true,
+const ticketSchema = new mongoose.Schema(
+  {
+    _id: String,
+    id: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    event: {
+      type: String,
+      ref: 'Event',
+    },
+    user: {
+      type: String,
+      ref: 'User',
+    },
   },
-  event: {
-    type: String,
-    ref: 'Event',
+  {
+    timestamps: true,
   },
-  user: {
-    type: String,
-    ref: 'User',
-  },
-});
+);
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
 
