@@ -1,5 +1,4 @@
 'use strict';
-const tslib = require('tslib');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const mongoose = require('mongoose');

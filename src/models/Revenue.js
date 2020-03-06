@@ -32,5 +32,6 @@ const revenueSchema = new mongoose.Schema(
 );
 
 const Revenue = mongoose.model('Revenue', revenueSchema);
+module.exports =  revenue;
 
-export default Revenue;
+

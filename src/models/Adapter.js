@@ -58,4 +58,4 @@ class ModelAdapter {
   }
 }
 
-export default ModelAdapter;
+module.exports = ModelAdapter;
