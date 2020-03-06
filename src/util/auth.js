@@ -2,6 +2,8 @@ const expressValidatorBody = require('express-validator');
 const bcrypt = require('bcrypt');
 const jsonWebToken = require('jsonwebtoken');
 
+const auth = {};
+
 /**
  * Generates jwt token
  * @param {string | object | Buffer} payload
@@ -9,7 +11,7 @@ const jsonWebToken = require('jsonwebtoken');
  * @param {number} expiryTime  -  Time taken for token to expire in minutes
  * @returns {string} token
  */
-export const generateJwtToken = (payload, key, expiryTime) => {
+auth.generateJwtToken = (payload, key, expiryTime) => {
   return jsonWebToken.sign(payload, key, {
     // Expires in 30 min
     expiresIn: 60 * expiryTime,
@@ -22,7 +24,7 @@ export const generateJwtToken = (payload, key, expiryTime) => {
  * @param {string} key
  * @returns {object | string} decoded data  if successful
  */
-export const verifyJwtToken = (token, key) => {
+auth.verifyJwtToken = (token, key) => {
   return jsonWebToken.verify(token, key);
 };
 
@@ -33,8 +35,10 @@ export const verifyJwtToken = (token, key) => {
  * @returns {boolean} true or false
  */
 
-export const comparePassword = async (password, encrypted) => {
+auth.comparePassword = async (password, encrypted) => {
   return bcrypt.compare(password, encrypted);
 };
 
-export const body = expressValidatorBody.body;
+auth.body = expressValidatorBody.body;
+
+module.exports = auth;
