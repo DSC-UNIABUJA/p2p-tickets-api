@@ -31,15 +31,7 @@ export const create = [
       .withMessage('Password should contain at least a uppercase letter')
       .matches(/\d/)
       .withMessage('Password should contain at least a number'),
-    authUtil
-      .body('dob', 'Date of birth is required and should be a valid date')
-      .exists()
-      .toDate(),
     authUtil.body('phone', 'Phone number is required').isLength({min: 11, max: 11}),
-    authUtil.body('occupation', 'occupation is required').isLength({min: 3}),
-    authUtil.body('stateOfOrigin', 'State of origin is required').isLength({min: 3}),
-    authUtil.body('stateOfResidence', 'State of residence').isLength({min: 3}),
-    authUtil.body('gender', 'gender is required').exists(),
     authUtil.body('bank.name', 'bank account name is required').isLength({min: 3}),
     authUtil.body('bank.number', 'bank account number is required').isLength({min: 3}),
   ]),
@@ -66,11 +58,11 @@ export const update = [
   async (req, res, next) => {
     try {
       const model = new ModelAdapter(User);
-      const user = await model.update({_id: req.id}, req.body);
+      const user = await model.update({id: req.id}, req.body);
       if (user === null) {
         return res.status(404).json({
           success: false,
-          message: 'User with _id doest not exists',
+          message: 'User with id doest not exists',
         });
       }
       // Send emails
@@ -119,7 +111,7 @@ export const login = [
       }
 
       // email and password is correct
-      const token = authUtil.generateJwtToken({id: user._id}, process.env.JWT_KEY, 30);
+      const token = authUtil.generateJwtToken({id: user.id}, process.env.JWT_KEY, 30);
 
       return res.status(200).json({
         success: true,
@@ -146,7 +138,7 @@ export const profile = [
       }
 
       const model = new ModelAdapter(User);
-      const user = await model.find({_id: id});
+      const user = await model.find({id: id});
       if (user === null) {
         return res.status(404).json({
           success: false,
