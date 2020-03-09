@@ -10,9 +10,9 @@ const app = express();
   try {
     const options = {
       useNewUrlParser: true,
+      useFindAndModify: false,
       useUnifiedTopology: true,
       autoIndex: false,
-      useFindAndModify: true,
     };
     await mongoose.connect(process.env.DB_URL, options);
   } catch (error) {

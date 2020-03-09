@@ -1,7 +1,7 @@
 const logger = require('../util/logger');
 const authUtil = require('../util/auth');
-const ModelAdapter = require('../Model/Adapter');
-const User = require('../Model/User');
+const ModelAdapter = require('../models/Adapter');
+const User = require('../models/User');
 
 const authenticatorMiddleware = {};
 
@@ -23,10 +23,11 @@ authenticatorMiddleware.jwt = async (req, res, next) => {
     });
   }
   try {
-    const decode = authUtil.verifyJwtToken(authorization, process.env.JWT_KEY);
+    const decode = authUtil.verifyJwtToken(authorization);
     req.id = decode.id;
     next();
   } catch (error) {
+    console.log(error.toString());
     logger.error(error);
     return res.status(401).json({
       success: false,

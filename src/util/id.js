@@ -1,4 +1,4 @@
-const ID = require('../models/id');
+const ID = require('../models/ID');
 const logger = require('./logger');
 
 const idUtil = {};

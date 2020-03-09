@@ -24,8 +24,8 @@ auth.generateJwtToken = (payload, expiryTime) => {
  * @param {string} key
  * @returns {object | string} decoded data  if successful
  */
-auth.verifyJwtToken = (token, key) => {
-  return jsonWebToken.verify(token, key);
+auth.verifyJwtToken = token => {
+  return jsonWebToken.verify(token, process.env.JWT_TOKEN);
 };
 
 /**
