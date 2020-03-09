@@ -1,6 +1,6 @@
 const validatorMiddleware = require('../middlewares/validator');
-const ModelAdapter = require('../Model/Adapter');
-const User = require('../Model/User');
+const ModelAdapter = require('../models/Adapter');
+const User = require('../models/User');
 const authUtil = require('../util/auth');
 
 // User controller object
@@ -34,9 +34,18 @@ userController.create = [
       .withMessage('Password should contain at least a uppercase letter')
       .matches(/\d/)
       .withMessage('Password should contain at least a number'),
-    authUtil.body('phone', 'Phone number is required').isLength({min: 11, max: 11}),
-    authUtil.body('bank.name', 'bank account name is required').isLength({min: 3}),
-    authUtil.body('bank.number', 'bank account number is required').isLength({min: 3}),
+    authUtil
+      .body('phone', 'Phone number is required')
+      .optional()
+      .isLength({min: 11, max: 11}),
+    authUtil
+      .body('bank.name', 'bank account name is required')
+      .optional()
+      .isLength({min: 3}),
+    authUtil
+      .body('bank.number', 'bank account number is required')
+      .optional()
+      .isLength({min: 3}),
   ]),
 
   async (req, res, next) => {

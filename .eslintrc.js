@@ -11,6 +11,7 @@ module.exports = {
   },
   rules: {
     'valid-jsdoc': 'off',
+    'new-cap': 'off',
   },
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
