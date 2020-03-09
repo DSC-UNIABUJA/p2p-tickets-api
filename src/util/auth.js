@@ -11,8 +11,8 @@ const auth = {};
  * @param {number} expiryTime  -  Time taken for token to expire in minutes
  * @returns {string} token
  */
-auth.generateJwtToken = (payload, key, expiryTime) => {
-  return jsonWebToken.sign(payload, key, {
+auth.generateJwtToken = (payload, expiryTime) => {
+  return jsonWebToken.sign(payload, process.env.JWT_TOKEN, {
     // Expires in 30 min
     expiresIn: 60 * expiryTime,
   });

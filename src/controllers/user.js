@@ -123,7 +123,7 @@ userController.login = [
       }
 
       // email and password is correct
-      const token = authUtil.generateJwtToken({id: user.id}, process.env.JWT_KEY, 30);
+      const token = authUtil.generateJwtToken({id: user.id}, 30);
 
       return res.status(200).json({
         success: true,
