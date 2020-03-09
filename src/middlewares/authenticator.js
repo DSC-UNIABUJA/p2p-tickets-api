@@ -3,6 +3,8 @@ const authUtil = require('../util/auth');
 const ModelAdapter = require('../Model/Adapter');
 const User = require('../Model/User');
 
+const authenticatorMiddleware = {};
+
 /**
  *
  * @param {require('express').Request} req
@@ -10,7 +12,7 @@ const User = require('../Model/User');
  * @param {require('express').NextFunction} res
  */
 
-export const jwt = async (req, res, next) => {
+authenticatorMiddleware.jwt = async (req, res, next) => {
   // Extract header
   let authorization = req.headers.authorization || '';
   authorization = authorization.replace('Bearer ', '');
@@ -21,7 +23,7 @@ export const jwt = async (req, res, next) => {
     });
   }
   try {
-    const decode = authUtil.verifyJwtToken(authorization, process.env.JWT_KEY as string) as any;
+    const decode = authUtil.verifyJwtToken(authorization, process.env.JWT_KEY);
     req.id = decode.id;
     next();
   } catch (error) {
@@ -33,7 +35,7 @@ export const jwt = async (req, res, next) => {
   }
 };
 
-export const hydrateUser = async (req, res, next) => {
+authenticatorMiddleware.hydrateUser = async (req, res, next) => {
   try {
     const model = new ModelAdapter(User);
     req.user = await model.find({id: req.id});
@@ -42,3 +44,5 @@ export const hydrateUser = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports = authenticatorMiddleware;

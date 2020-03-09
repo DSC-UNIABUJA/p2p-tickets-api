@@ -1,10 +1,12 @@
 const {validationResult} = require('express-validator');
 
+const validatorMiddleware = {};
+
 /**
  * For validating the inputs
  * @param {Array<ValidationChain>} validations
  */
-export const inputs = validations => {
+validatorMiddleware.inputs = validations => {
   return async (req, res, next) => {
     await Promise.all(validations.map(validation => validation.run(req)));
 
@@ -16,3 +18,5 @@ export const inputs = validations => {
     res.status(400).json({success: false, errors: errors.array()});
   };
 };
+
+module.exports = validatorMiddleware;
