@@ -2,6 +2,9 @@ const validatorMiddleware = require('../middlewares/validator');
 const ModelAdapter = require('../Model/Adapter');
 const User = require('../Model/User');
 const authUtil = require('../util/auth');
+
+// User controller object
+const userController = {};
 /*
 
     User Controller File
@@ -11,7 +14,7 @@ const authUtil = require('../util/auth');
 /*
     Creates a user
  */
-export const create = [
+userController.create = [
   validatorMiddleware.inputs([
     authUtil
       .body('email', 'email is required and should be valid')
@@ -54,7 +57,7 @@ export const create = [
 /*
     Updates a user
  */
-export const update = [
+userController.update = [
   async (req, res, next) => {
     try {
       const model = new ModelAdapter(User);
@@ -81,7 +84,7 @@ export const update = [
 /*
     Login user
  */
-export const login = [
+userController.login = [
   validatorMiddleware.inputs([
     authUtil
       .body('email', 'Email is required and must be valid')
@@ -124,7 +127,7 @@ export const login = [
   },
 ];
 
-export const profile = [
+userController.profile = [
   async (req, res, next) => {
     try {
       console.log(req.user);
@@ -157,12 +160,10 @@ export const profile = [
   },
 ];
 
-export const getLoans = [async (req, res) => res.send()];
-
 /*
     Updates a user password
  */
-export const updatePassword = [
+userController.updatePassword = [
   validatorMiddleware.inputs([
     authUtil.body('oldPassword', 'Old password is required').exists(),
     authUtil
@@ -196,3 +197,5 @@ export const updatePassword = [
     }
   },
 ];
+
+module.exports = userController;
