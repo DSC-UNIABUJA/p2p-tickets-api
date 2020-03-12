@@ -8,6 +8,10 @@ const ticketSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    package: {
+      type: String,
+      required: true,
+    },
     event: {
       type: String,
       ref: 'Event',

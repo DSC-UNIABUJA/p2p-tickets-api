@@ -17,7 +17,8 @@ const eventSchema = new mongoose.Schema(
     },
     ticketPackage: [
       {
-        amount: String,
+        amount: Number,
+        _id: String,
         id: String,
         name: String,
         desc: String,

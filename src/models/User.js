@@ -18,10 +18,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       ref: 'Role',
     },
-    password: {
-      type: String,
-      required: true,
-    },
+    password: String,
   },
   {
     timestamps: true,
@@ -33,7 +30,7 @@ userSchema.pre('findOne', function(next) {
 });
 
 userSchema.pre('save', async function(next) {
-  if (this.isModified('password')) {
+  if (this.password && this.isModified('password')) {
     const salt = await bcrypt.genSalt(10);
     try {
       this.password = await bcrypt.hash(this.password, salt);

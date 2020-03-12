@@ -1,5 +1,6 @@
 const validatorMiddleware = require('../middlewares/validator');
 const authUtil = require('../util/auth');
+const idUtil = require('../util/id');
 const ModelAdapter = require('../models/Adapter');
 const User = require('../models/User');
 const Ticket = require('../models/Ticket');
@@ -39,7 +40,11 @@ eventController.buyTicket = [
 
       // Create a ticket
       model = new ModelAdapter(Ticket);
-      const ticket = await model.create({event: req.body.eventId, user: user.id});
+      const ticket = await model.create({
+        event: req.body.eventId,
+        user: user.id,
+        package: ticketPackage.id,
+      });
 
       // Create a payment
       model = new ModelAdapter(Payment);
@@ -53,9 +58,10 @@ eventController.buyTicket = [
           phone: user.phone,
         },
       });
+      console.log(trans);
       return res.status(200).json({
         success: true,
-        details: trans.data,
+        details: trans,
       });
     } catch (err) {
       next(err);
@@ -74,8 +80,14 @@ eventController.create = [
     try {
       // Get admin id
       const id = req.id;
+
+      for (const t of req.body.ticketPackage) {
+        t.id = await idUtil.getId();
+        t._id = t.id;
+      }
+
       const model = new ModelAdapter(Event);
-      const event = model.create({...req.body, admin: id});
+      const event = await model.create({...req.body, admin: id});
       return res.json({
         success: true,
         details: event,
