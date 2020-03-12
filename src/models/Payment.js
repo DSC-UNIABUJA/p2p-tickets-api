@@ -8,6 +8,7 @@ const paymentSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    desc: String,
     success: {
       type: Date,
       default: null,
@@ -28,6 +29,5 @@ const paymentSchema = new mongoose.Schema(
 );
 
 const Payment = mongoose.model('Payment', paymentSchema);
-
 
 module.exports = Payment;

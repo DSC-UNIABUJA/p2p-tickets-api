@@ -10,12 +10,19 @@ const eventSchema = new mongoose.Schema(
     },
     name: String,
     location: String,
-    amount: String,
     coordinates: String,
     admin: {
       type: String,
       ref: 'User',
     },
+    ticketPackage: [
+      {
+        amount: String,
+        id: String,
+        name: String,
+        desc: String,
+      },
+    ],
   },
   {
     timestamps: true,
