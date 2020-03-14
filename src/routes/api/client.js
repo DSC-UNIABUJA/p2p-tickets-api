@@ -15,6 +15,8 @@ userRouter.use(authenticatorMiddleware.hydrateUser);
 userRouter.post('/update', userController.update);
 
 const eventRouter = express.Router();
+eventRouter.use(authenticatorMiddleware.jwt);
+eventRouter.use(authenticatorMiddleware.hydrateUser);
 eventRouter.post('/create', eventController.create);
 eventRouter.post('/buyticket', eventController.buyTicket);
 
